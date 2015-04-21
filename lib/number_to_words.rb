@@ -30,28 +30,79 @@ class Fixnum
               90 => "ninety"
               }
 
-     ones = words.fetch(self.%(10))
-     tens = words.fetch(self.%(100).-(self.%(10)))
-     hundreds = words.fetch(self.%(1000)/100)
-     thousands = words.fetch(self%(10000)/1000)
-     tenthousand = words.fetch((self/10000)*10)
-     hundredthousand = words.fetch(self/100000)
-    #  millions = words.fetch(self/1000000)
+    #  ones = words.fetch(self.%(10))
+    #  tens = words.fetch(self.%(100).-(self.%(10)))
+    #  hundreds = words.fetch(self.%(1000)/100)
+    #  thousands = words.fetch(self%(10000)/1000)
+    #  tenthousand = words.fetch((self/1000)-((self.%10000)/1000))
+    #  hundredthousand = words.fetch(self/100000)
+    #  million = words.fetch(self/1000000)
 
+# deals with zero
     if self.<(1)
       word_numbers = "zero"
+
+# checks if key already exists
     elsif words.include?(self)
         word_numbers = words.fetch(self)
+
+# deals with tens
     elsif self.<(100)
+      ones = words.fetch(self.%(10))
+      tens = words.fetch(self.%(100).-(self.%(10)))
       word_numbers = tens.concat(" ").concat(ones)
+
+#deals with hundreds
     elsif self.<(1000)
+      ones = words.fetch(self.%(10))
+      tens = words.fetch(self.%(100).-(self.%(10)))
+      hundreds = words.fetch(self.%(1000)/100)
       word_numbers = hundreds.concat(" hundred ").concat(tens).concat(" ").concat(ones)
+
+    elsif self.%(10).eql?(0) && self.<(10000)
+      thousands = words.fetch(self%(10000)/1000)
+      word_numbers = thousands.concat(" thousand")
+
+#deals with thousands
     elsif self.<(10000)
+      ones = words.fetch(self.%(10))
+      tens = words.fetch(self.%(100).-(self.%(10)))
+      hundreds = words.fetch(self.%(1000)/100)
+      thousands = words.fetch(self%(10000)/1000)
       word_numbers = thousands.concat(" thousand ").concat(hundreds).concat(" hundred ").concat(tens).concat(" ").concat(ones)
+
+#deals with ten thousand
+
     elsif self.<(100000)
-      word_numbers = tenthousand.concat(" ").concat(thousands).concat(" thousand ").concat(hundreds).concat(" hundred ").concat(tens).concat(" ").concat(ones)
-    elsif self.<(1000000)
-      word_numbers = hundredthousand.concat(" ").concat(tenthousand).concat(" ").concat(thousands).concat(" thousand ").concat(hundreds).concat(" hundred ").concat(tens).concat(" ").concat(ones)
+      ones = words.fetch(self.%(10))
+      tens = words.fetch(self.%(100).-(self.%(10)))
+      hundreds = words.fetch(self.%(1000)/100)
+      thousands = words.fetch(self%(10000)/1000)
+      tenthousand = words.fetch((self/1000)-((self.%10000)/1000))
+      word_numbers = tenthousand.concat(thousands).concat(" thousand ").concat(hundreds).concat(" hundred ").concat(tens).concat(" ").concat(ones)
+
+    elsif self.%(10).eql?(0) && self.<(100000)
+      hundredthousand = words.fetch(self/100000)
+      word_numbers = tenthousand.concat(" thousand")
+
+#deals with hundred thousands
+    elsif self.<(100000)
+      ones = words.fetch(self.%(10))
+       tens = words.fetch(self.%(100).-(self.%(10)))
+       hundreds = words.fetch(self.%(1000)/100)
+       thousands = words.fetch(self%(10000)/1000)
+       tenthousand = words.fetch(self.%(100000)/10000)
+       hundredthousand = words.fetch(self/100000)
+      word_numbers = hundredthousand.concat(" ").concat(" hundred ").concat(tenthousand).concat(" ").concat(thousands).concat(" thousand ").concat(hundreds).concat(" hundred ").concat(tens).concat(" ").concat(ones)
+
+    elsif self.%(10).eql?(0) && self.<(1000000)
+      word_numbers = hundredthousand.concat(" hundred thousand")
+
+#deals with millions
+    # elsif self.<(1000000)
+    #   word_numbers = hundredthousand.concat(" ").concat(tenthousand).concat(" ").concat(thousands).concat(" thousand ").concat(hundreds).concat(" hundred ").concat(tens).concat(" ").concat(ones)
+    # elsif self.%(10).eql?(0) && self.<(10000000)
+      # word_numbers = million.concat(" million")
 
 
     # if words.include?(self)

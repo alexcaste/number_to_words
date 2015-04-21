@@ -27,8 +27,13 @@ describe('Fixnum#number_to_words') do
     expect(5678.number_to_words()).to(eq("five thousand six hundred seventy eight"))
   end
 
-  #the program converts quadruple digit numbers into its word format
+  #the program converts quintuple digit numbers into its word format
   it("converts quintuple digit numbers into words") do
     expect(56789.number_to_words()).to(eq("fifty six thousand seven hundred eighty nine"))
+  end
+
+  #the program converts sextuple digit numbers into its word format
+  it("converts sextuple digit numbers into words") do
+    expect(123456.number_to_words()).to(eq("one hundred twenty three thousand four hundred fifty six"))
   end
 end
