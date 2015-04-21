@@ -1,4 +1,5 @@
 require('rspec')
+require('number_to_words')
 require('pry')
 
 describe('Fixnum#number_to_words') do
