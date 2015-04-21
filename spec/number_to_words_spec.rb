@@ -7,4 +7,9 @@ describe('Fixnum#number_to_words') do
  it("takes the number and converts it to its word format") do
   expect(3.number_to_words()).to(eq("three"))
  end
+
+  #the program converts a double digit number into its word format
+  it("converts double digit numbers into words") do
+    expect(55.number_to_words()).to(eq("fifty five"))
+  end
 end
