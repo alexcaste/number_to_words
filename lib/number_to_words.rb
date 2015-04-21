@@ -32,10 +32,11 @@ class Fixnum
 
      ones = words.fetch(self.%(10))
      tens = words.fetch(self.%(100).-(self.%(10)))
-     hundreds = words.fetch(self/100)
-    #  thousands = words.fetch(self/1000)
+     hundreds = words.fetch(self.%(1000)/100)
+     thousands = words.fetch(self/1000)
     #  tenthousand = words.fetch(self/10000)
     #  hundredthousand = words.fetch(self/100000)
+    #  millions = words.fetch(self/1000000)
 
     if self.<(1)
       word_numbers = "zero"
@@ -45,7 +46,12 @@ class Fixnum
       word_numbers = tens.concat(" ").concat(ones)
     elsif self.<(1000)
       word_numbers = hundreds.concat(" hundred ").concat(tens).concat(" ").concat(ones)
-
+    elsif self.<(10000)
+      word_numbers = thousands.concat(" thousand ").concat(hundreds).concat(" hundred ").concat(tens).concat(" ").concat(ones)
+    # elsif self.<(100000)
+    #   word_numbers = hundreds.concat(" hundred ").concat(tens).concat(" ").concat(ones)
+    # elsif self.<(1000000)
+    #   word_numbers = hundreds.concat(" hundred ").concat(tens).concat(" ").concat(ones)
 
 
     # if words.include?(self)
