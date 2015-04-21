@@ -27,14 +27,36 @@ class Fixnum
               60 => "sixty",
               70 => "seventy",
               80 => "eighty",
-              90 => "ninety" }
+              90 => "ninety"
+              }
 
-    if words.include?(self)
-    word_numbers = words.fetch(self)
-  elsif self.<=(100)
-    ones = (self.%(10))
-    tens = (self.-(ones))
-    word_numbers = words.fetch(tens).concat(" ").concat((words.fetch(ones)))
+     ones = words.fetch(self.%(10))
+     tens = words.fetch(self.%(100).-(self.%(10)))
+     hundreds = words.fetch(self/100)
+    #  thousands = words.fetch(self/1000)
+    #  tenthousand = words.fetch(self/10000)
+    #  hundredthousand = words.fetch(self/100000)
+
+    if self.<(1)
+      word_numbers = "zero"
+    elsif words.include?(self)
+        word_numbers = words.fetch(self)
+    elsif self.<(100)
+      word_numbers = tens.concat(" ").concat(ones)
+    elsif self.<(1000)
+      word_numbers = hundreds.concat(" hundred ").concat(tens).concat(" ").concat(ones)
+
+
+
+    # if words.include?(self)
+    #   word_numbers = words.fetch(self)
+    # elsif self.<(100)
+    #   ones = (self.%(10))
+    #   tens = (self/10)
+    #   hundreds1
+    # elsif self.<(1000)
+    #   hundreds = self/100
+    # word_numbers = words.fetch(tens).concat(" ").concat((words.fetch(ones)))
     end
     word_numbers
   end
